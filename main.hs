@@ -7,6 +7,7 @@ import           AWS.Lambda
 import           Control.Lens
 import           Control.Monad           (forM)
 import           Control.Monad.Trans.AWS
+import           Data.Bits
 import           Data.Functor            (void)
 import           Data.List               (isPrefixOf)
 import           Data.Text               (unpack)
@@ -18,6 +19,7 @@ import           System.FilePath
 import           System.IO
 import           System.IO.Extra
 import           System.Process
+import           System.Posix.Files
 
 
 main :: IO ()
@@ -49,6 +51,8 @@ go BuildLambda{..} = do
       packLambda exe files = do
         runner <- setMainTo exe <$> readFile "run-tmpl.js"
         writeFile "run.js" runner
+        let fmode = ownerModes .|. groupExecuteMode .|. groupReadMode .|. otherExecuteMode .|. otherReadMode
+        setFileMode exe fmode
         callProcess "zip" $ [ "lambda.zip", "run.js" ] ++ files
 
 go DeployLambda{..} = do
@@ -99,6 +103,3 @@ standardLibs =  [ "linux-vdso.so.1"
                 , "libc.so.6"
                 , "/lib64/ld-linux-x86-64.so.2"
                 ]
-
-
-
