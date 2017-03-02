@@ -17,7 +17,7 @@ cabal-version:       >=1.10
 
 executable alh
   main-is:             main.hs
-  -- other-modules:    
+  other-modules:       AWS.ApiGateway, AWS.Lambda, System.Config
   -- other-extensions:    
   build-depends:       base >=4.8 && <4.9,
                        amazonka, amazonka-apigateway, amazonka-lambda, bytestring, directory, exceptions, filepath, lens, mtl

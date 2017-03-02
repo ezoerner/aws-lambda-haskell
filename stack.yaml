@@ -8,7 +8,7 @@ packages:
 - location:
     git: https://github.com/abailly/hs-word2vec
     commit: f3fb0a797056c9ae325367e1035ba4fd16f3b2d3
-
+  extra-dep: true
 extra-deps:
   - 'amazonka-core-1.4.3'
   - 'amazonka-1.4.3'
