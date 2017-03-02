@@ -15,7 +15,7 @@ build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
 
-executable main
+executable alh
   main-is:             main.hs
   -- other-modules:    
   -- other-extensions:    
